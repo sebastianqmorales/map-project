@@ -48,6 +48,13 @@ if (navigator.geolocation) {
 form.addEventListener('submit', e => {
   e.preventDefault();
 
+  //clear input fields
+  inputCadence.value =
+    inputDistance.value =
+    inputDuration.value =
+    inputElevation.value =
+      '';
+
   //display marker
   const { lat, lng } = mapEvent.latlng;
 
@@ -64,4 +71,9 @@ form.addEventListener('submit', e => {
     )
     .setPopupContent('Hello runner')
     .openPopup();
+});
+
+inputType.addEventListener('change', () => {
+  inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+  inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
 });
