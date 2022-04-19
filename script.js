@@ -40,9 +40,9 @@ class App {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
     const coords = [latitude, longitude];
-
+    console.log(coords);
     //load position on map
-    this.#map = L.map('map').setView(coords, 14);
+    this.#map = L.map('map').setView(coords, 15);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
