@@ -11,6 +11,50 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+class Workout {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+
+  constructor(coords, distance, duration) {
+    this.coords = coords; //[lat, lang]
+    this.distance = distance; //in km
+    this.duration = duration; //in min
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.calcePace();
+  }
+
+  calcePace() {
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+// const run = new Running([39, -12], 5.2, 24, 178);
+// const cycling = new Cycling([39 - 12], 10, 60, 120);
+// console.log(run, cycling);
+
+///////////////////////////////////////////////////////////////////////////
+///////APPLICATION ARCHITECTURE////////////////////////////////////////////
+
 class App {
   #map;
   #mapEvent;
@@ -40,7 +84,6 @@ class App {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
     const coords = [latitude, longitude];
-    console.log(coords);
     //load position on map
     this.#map = L.map('map').setView(coords, 15);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -65,6 +108,15 @@ class App {
 
   _newWorkout(e) {
     e.preventDefault();
+    //get data from form
+    //check if data is valid
+    //if running create running object
+    //if cycling create cycling object
+    //add new workout to array
+    //render workout on map as marker
+    //render workout on list
+    //hide form + clear input fields
+
     //clear input fields
     inputCadence.value =
       inputDistance.value =
