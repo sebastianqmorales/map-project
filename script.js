@@ -75,6 +75,9 @@ class App {
   constructor() {
     //on use of app class, constructor will initate these funtions, //gets postition
     this._getPostition();
+    //get data from local storage
+    this._getLocalStorage();
+
     //event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
@@ -107,6 +110,11 @@ class App {
 
     //handling clicks on map - diaplaying form
     this.#map.on('click', this._showForm.bind(this));
+
+    //rendering the local storage workouts as a popup
+    this.#workouts.forEach(work => {
+      this._renderWorkoutMarker(work);
+    });
   }
 
   _showForm(mapE) {
@@ -183,6 +191,9 @@ class App {
     this._renderWorkout(workout);
     //hide form + clear input fields
     this._hideForm();
+
+    //set local storage to all workouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -277,8 +288,31 @@ class App {
     //using public interface
     workout.click();
   }
+
+  //using Local Storage, first making local storage and then rendering it
+  //(getting) it onto the list on the left
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    if (!data) return;
+
+    this.#workouts = data;
+
+    this.#workouts.forEach(work => {
+      this._renderWorkout(work);
+    });
+  }
 }
 
 //starting the app
 const app = new App();
 //
+
+//features I would like to add:
+//1.using a button to clear local storage
+//2.highlighting each popup with a colored border on the map when it is cliked on
+//3.if you click on the map popup it will move the map to the popup (like what is already on the list)
+//4.adding a delete button on the list with a "are you sure popup", will work with deleting from local storage aswell
