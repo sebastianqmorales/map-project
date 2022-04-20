@@ -269,14 +269,12 @@ class App {
 
   _moveToPopup(e) {
     const workoutEl = e.target.closest('.workout');
-    console.log(workoutEl);
 
     if (!workoutEl) return;
 
     const workout = this.#workouts.find(
       work => work.id === workoutEl.dataset.id
     );
-    console.log(workout);
 
     this.#map.setView(workout.coords, 16, {
       animate: true,
@@ -286,7 +284,7 @@ class App {
     });
 
     //using public interface
-    workout.click();
+    // workout.click();
   }
 
   //using Local Storage, first making local storage and then rendering it
@@ -316,3 +314,5 @@ const app = new App();
 //2.highlighting each popup with a colored border on the map when it is cliked on
 //3.if you click on the map popup it will move the map to the popup (like what is already on the list)
 //4.adding a delete button on the list with a "are you sure popup", will work with deleting from local storage aswell
+//5.objects recovered from local storage are new objects that dont inherit the prototype chain,
+//
