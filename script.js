@@ -315,9 +315,19 @@ const app = new App();
 //
 
 //features I would like to add:
+//IMPORTANT refactoring the code to be more readable, better comments, when new features are added include them in the architecture chart
 //1.using a button to clear local storage
 //2.highlighting each popup with a colored border on the map when it is cliked on
 //3.if you click on the map popup it will move the map to the popup (like what is already on the list)
 //4.adding a delete button on the list with a "are you sure popup", will work with deleting from local storage aswell
 //5.objects recovered from local storage are new objects that dont inherit the prototype chain,
-//
+//challenges:
+//edit a workout, delete a workout, delete all workouts
+//ability to sort workouts by a certain field
+//rebuild the running and cycling objects coming from local storage
+//more realistic error and confirmation messages
+//harder challenges:
+//ability to position the map to show all workouts all over the world (focused on leaflet)
+//drawing lines and shapes instead of points, maybe connecting 2 points
+//geocode location from coords, to give you the name of the place
+//display weather for the workout time and place (both of these require async and thrid party libraries)
