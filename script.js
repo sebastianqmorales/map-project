@@ -331,3 +331,4 @@ const app = new App();
 //drawing lines and shapes instead of points, maybe connecting 2 points
 //geocode location from coords, to give you the name of the place
 //display weather for the workout time and place (both of these require async and thrid party libraries)
+//test
