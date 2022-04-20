@@ -3,6 +3,7 @@
 class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
+  clicks = 0;
 
   constructor(coords, distance, duration) {
     this.coords = coords; //[lat, lang]
@@ -16,6 +17,10 @@ class Workout {
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
     } ${this.date.getDate()}`;
+  }
+
+  click() {
+    this.clicks++;
   }
 }
 
@@ -70,9 +75,10 @@ class App {
   constructor() {
     //on use of app class, constructor will initate these funtions, //gets postition
     this._getPostition();
-    //form event handlers
+    //event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPostition() {
@@ -169,7 +175,6 @@ class App {
 
     //add new workout to array
     this.#workouts.push(workout);
-    console.log(workout);
 
     //render workout on map as marker
     this._renderWorkoutMarker(workout);
@@ -249,6 +254,28 @@ class App {
     }
 
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+    console.log(workoutEl);
+
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(
+      work => work.id === workoutEl.dataset.id
+    );
+    console.log(workout);
+
+    this.#map.setView(workout.coords, 16, {
+      animate: true,
+      pan: {
+        duration: 0.5,
+      },
+    });
+
+    //using public interface
+    workout.click();
   }
 }
 
