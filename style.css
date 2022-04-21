@@ -55,6 +55,20 @@ a:visited {
   margin-bottom: 4rem;
 }
 
+.delete__all {
+  align-self: center;
+  padding: 0.5rem;
+  margin: 2rem;
+  border: 1px solid red;
+  border-radius: 0.5rem;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.delete__all:hover {
+  transform: scale(1.25);
+}
+
 .workouts {
   list-style: none;
   height: 77vh;

@@ -67,6 +67,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const deleteAll = document.querySelector('.delete__all');
 
 class App {
   #map;
@@ -82,6 +83,7 @@ class App {
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
+    deleteAll.addEventListener('click', this.reset);
   }
 
   _getPostition() {
@@ -313,7 +315,6 @@ class App {
 //starting the app
 const app = new App();
 //
-
 //features I would like to add:
 //IMPORTANT refactoring the code to be more readable, better comments, when new features are added include them in the architecture chart
 //1.using a button to clear local storage
