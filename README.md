@@ -1,1 +1,3 @@
-project details to be added
+### General Architecture
+
+![final architecture chart](/Mapty-architecture-final.png)
